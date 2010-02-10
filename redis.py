@@ -1304,14 +1304,7 @@ class Redis(object):
             buf.append(data)
 
         data = ''.join(buf)[:-2]
-        try:
-            if not '.' in data:
-                value = int(data)
-            else:
-                value = self.float_fn(data)
-            return value
-        except (ValueError, decimal.InvalidOperation):
-            return data.decode(self.charset)
+        return data
     
     def disconnect(self):
         if self._sock is not None:
